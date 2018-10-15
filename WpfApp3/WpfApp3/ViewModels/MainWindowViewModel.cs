@@ -9,10 +9,30 @@ namespace WpfApp3
     class MainWindowViewModel
     {
         //List<Visitor> visitors;
-        public MainWindowViewModel()
+        private Action close;
+        public MainWindowViewModel(
+            Action Close)
+        {
+            //LoginAsync().Wait();
+            close = Close;
+
+            WindowLogin windowLogin = new WindowLogin();
+            bool? dialogResult = windowLogin.ShowDialog();
+            System.Windows.Forms.MessageBox.Show(dialogResult.ToString());
+            if (dialogResult==true)
+            {
+                System.Windows.Forms.MessageBox.Show(windowLogin.Password.ToString());                
+            }
+        }
+
+        private Task<bool?> LoginAsync()
         {
             WindowLogin windowLogin = new WindowLogin();
-            windowLogin.ShowDialog();
+            return Task.Run(() =>
+            {
+                bool? dialogResult = windowLogin.ShowDialog();
+                return dialogResult;
+            });
         }
 
         public List<Visitor> Visitors
@@ -25,7 +45,9 @@ namespace WpfApp3
                 }
                 catch (Exception ex)
                 {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                    System.Windows.Forms.MessageBox.Show("Ошибка соединения с базой данных");
+                    //System.Windows.Forms.MessageBox.Show(ex.Message+"\n"+ ex.ToString());
+                    close.Invoke();//TODO <-- Delete this line
                     return null;
                 }
             }

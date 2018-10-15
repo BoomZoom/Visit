@@ -21,7 +21,7 @@ namespace WpfApp3
     {
         public WindowLogin()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)
@@ -31,7 +31,7 @@ namespace WpfApp3
 
         public string Password
         {
-            get { return passwordBox.Text; }
+            get { return passwordBox.Password; }
         }
     }
 }

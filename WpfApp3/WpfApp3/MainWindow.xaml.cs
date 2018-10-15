@@ -23,7 +23,7 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(Close);            
         }        
     }
 }
