@@ -13,27 +13,17 @@ namespace WpfApp3
         public MainWindowViewModel(
             Action Close)
         {
-            //LoginAsync().Wait();
             close = Close;
 
             WindowLogin windowLogin = new WindowLogin();
             bool? dialogResult = windowLogin.ShowDialog();
             System.Windows.Forms.MessageBox.Show(dialogResult.ToString());
-            if (dialogResult==true)
-            {
-                System.Windows.Forms.MessageBox.Show(windowLogin.Password.ToString());                
-            }
+            //if (dialogResult==true)
+            //{
+            //    System.Windows.Forms.MessageBox.Show(windowLogin.Password.ToString());                
+            //}
         }
-
-        private Task<bool?> LoginAsync()
-        {
-            WindowLogin windowLogin = new WindowLogin();
-            return Task.Run(() =>
-            {
-                bool? dialogResult = windowLogin.ShowDialog();
-                return dialogResult;
-            });
-        }
+       
 
         public List<Visitor> Visitors
         {
@@ -43,7 +33,7 @@ namespace WpfApp3
                 {
                     return App.Db.Visitor.ToList();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     System.Windows.Forms.MessageBox.Show("Ошибка соединения с базой данных");
                     //System.Windows.Forms.MessageBox.Show(ex.Message+"\n"+ ex.ToString());

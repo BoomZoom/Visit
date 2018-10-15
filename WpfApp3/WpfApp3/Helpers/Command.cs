@@ -19,15 +19,15 @@ namespace WpfApp3
         }
 
 
-        public Command(Action<object> action)
+        public Command(Action<object> action, Func<object, bool> canExecute = null)
         {
             this.execute = action;
         }
-        public Action<object> Action { get => execute; private set => execute = value; }
+        //public Action<object> Action { get => execute; private set => execute = value; }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return canExecute == null || canExecute(parameter);
         }
 
         public void Execute(object parameter)
