@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +20,10 @@ namespace WpfApp3
     /// </summary>
     public partial class WindowLogin : Window
     {
+        Regex regexPassword = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$");
         public WindowLogin()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void Accept_Click(object sender, RoutedEventArgs e)
